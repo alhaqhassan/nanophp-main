@@ -1,0 +1,50 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e485a88d874694e4b275776c9d2ae75c",
+    "packages": [
+        {
+            "name": "nanophp/nanophp",
+            "version": "1.0.3-beta.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/domenicomastrangelo/nanophp.git",
+                "reference": "d1503236d502176eefeac904f116ac4ec553e5fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/domenicomastrangelo/nanophp/zipball/d1503236d502176eefeac904f116ac4ec553e5fb",
+                "reference": "d1503236d502176eefeac904f116ac4ec553e5fb",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NanoPHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2020-07-05T09:27:13+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "nanophp/nanophp": 10
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.4"
+    },
+    "plugin-api-version": "1.1.0"
+}
