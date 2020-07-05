@@ -8,7 +8,6 @@ class Home extends BaseController
 {
     public function homepage(\App\Models\User $user)
     {
-        print_r($user->getUserByName("Domenico"));
         return $this->getView();
     }
 }
