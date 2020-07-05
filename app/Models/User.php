@@ -6,11 +6,11 @@ class User extends BaseModel
 {
     protected string $tableName = "users";
 
-    public function getUserByName(string $name): array
+    public function getUserById(string $id): array
     {
-        $sql  = "select users.name, users.surname from users where name = :name";
+        $sql  = "select users.name, users.surname from users where id = :id";
         $stmt = $this->dbInstance->prepare($sql);
-        $stmt->execute(['name' => $name]);
+        $stmt->execute(['id' => $id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
