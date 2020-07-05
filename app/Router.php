@@ -2,26 +2,34 @@
 
 namespace App;
 
+use ReflectionClass;
+
 class Router
 {
-    private $URI;
-    private $routes = [];
+    private string $URI;
+    private array $routes = [];
+    private ?\NanoPHP\DependencyInjector $di = null;
 
-    public function __construct(string $URI, array $routes)
+    public function __construct()
+    {
+    }
+
+    public function setDependencyInjector(\NanoPHP\DependencyInjector $di): self
+    {
+        $this->di = $di;
+        return $this;
+    }
+
+    public function setURI(string $URI): self
     {
         $this->URI = $URI;
+        return $this;
+    }
+
+    public function setRoutes(array $routes): self
+    {
         $this->routes = $routes;
-        
-        try {
-            $this->checkRouteExists();
-            $this->route($routes[$URI]);
-        } catch (\Exception $e) {
-            if (Config::DEBUG_MODE) {
-                echo $e;
-            } else {
-                echo "404 - Page not found";
-            }
-        }
+        return $this;
     }
 
     private function checkRouteExists()
@@ -31,25 +39,39 @@ class Router
         }
     }
 
-    private function route(string $controllerAndFunction)
+    public function route()
     {
         try {
-            $controller = '';
-            $function   = '';
-            list($controller, $function) = explode("@", $controllerAndFunction);
-            $controller = "App\\Controllers\\" . $controller;
+            $this->checkRouteExists();
+        } catch (\Exception $e) {
+            if (Config::DEBUG_MODE) {
+                echo $e;
+            } else {
+                echo "404 - Page not found";
+            }
+        }
+
+        $controllerAndFunction = $this->routes[$this->URI];
+
+        try {
+            $controllerName = '';
+            $functionName   = '';
+            list($controllerName, $functionName) = explode("@", $controllerAndFunction);
+            $controllerName = "App\\Controllers\\" . $controllerName;
             
-            if (!class_exists($controller)) {
-                throw new \Exception("Class $controller not found");
+            if (!class_exists($controllerName)) {
+                throw new \Exception("Class $controllerName not found");
             }
             
-            $controllerObject = new $controller();
+            $controllerObject = new $controllerName($this->di);
 
-            if (!method_exists($controllerObject, $function)) {
-                throw new \Exception("Method $function not found");
+            if (!method_exists($controllerObject, $functionName)) {
+                throw new \Exception("Method $functionName not found");
             }
 
-            echo $controllerObject->$function();
+            $parametersToPassToMethod = $this->getMethodParamsInstantiated($controllerObject, $functionName);
+
+            echo $controllerObject->$functionName(...$parametersToPassToMethod);
         } catch (\Exception $e) {
             if (Config::DEBUG_MODE) {
                 echo $e;
@@ -57,5 +79,24 @@ class Router
                 echo "500 - Internal Server Error";
             }
         }
+    }
+
+    private function getMethodParamsInstantiated(\NanoPHP\Controllers\BaseController $controllerObject, string $function): array
+    {
+        $reflectorClass           = new ReflectionClass($controllerObject);
+        $reflectorMethod          = $reflectorClass->getMethod($function);
+        $reflectorMethodParams    = $reflectorMethod->getParameters();
+        $parametersToPassToMethod = [];
+
+        foreach ($reflectorMethodParams as $param) {
+            $class = $param->getClass();
+            if ($class != null) {
+                $parametersToPassToMethod[] = $class->newInstance();
+            } else {
+                $parametersToPassToMethod[] = null;
+            }
+        }
+
+        return $parametersToPassToMethod;
     }
 }
