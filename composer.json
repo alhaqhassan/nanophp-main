@@ -10,7 +10,7 @@
       }
     },
     "require": {
-      "nanophp/nanophp": "^1.0.4"
+      "nanophp/nanophp": "^1.0.6"
     },
     "require-dev": {
       "phpunit/phpunit": "^9.2.5"
