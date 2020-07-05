@@ -13,7 +13,7 @@ COPY . .
 COPY ./httpd/sites-enabled /etc/apache2/sites-enabled
 
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet
-RUN php composer.phar install --no-interaction
+RUN php composer.phar install --no-interaction --no-dev
 
 CMD [ "apache2-foreground" ]
 
