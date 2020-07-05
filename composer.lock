@@ -4,21 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57820f5ff4ab444554ccb47aef6fa755",
+    "content-hash": "97b0857ab41c5c590560ac3629e2851f",
     "packages": [
         {
             "name": "nanophp/nanophp",
-            "version": "1.0.3-beta.1",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/domenicomastrangelo/nanophp.git",
-                "reference": "d1503236d502176eefeac904f116ac4ec553e5fb"
+                "reference": "633d209b0d251a162f2547ce5e07a573704797ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/domenicomastrangelo/nanophp/zipball/d1503236d502176eefeac904f116ac4ec553e5fb",
-                "reference": "d1503236d502176eefeac904f116ac4ec553e5fb",
+                "url": "https://api.github.com/repos/domenicomastrangelo/nanophp/zipball/633d209b0d251a162f2547ce5e07a573704797ab",
+                "reference": "633d209b0d251a162f2547ce5e07a573704797ab",
                 "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2.5"
             },
             "type": "library",
             "autoload": {
@@ -30,7 +33,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-07-05T09:27:13+00:00"
+            "time": "2020-07-05T15:34:12+00:00"
         }
     ],
     "packages-dev": [
@@ -1822,9 +1825,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "nanophp/nanophp": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
