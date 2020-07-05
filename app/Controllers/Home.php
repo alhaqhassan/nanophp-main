@@ -6,13 +6,9 @@ use NanoPHP\Controllers\BaseController;
 
 class Home extends BaseController
 {
-    public function __construct(\NanoPHP\DependencyInjector $di)
+    public function homepage(\App\Models\User $user)
     {
-        parent::__construct($di);
-    }
-
-    public function homepage()
-    {
+        print_r($user->getUserByName("Domenico"));
         return $this->getView();
     }
 }
