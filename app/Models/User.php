@@ -2,7 +2,15 @@
 
 namespace App\Models;
 
-class User extends \NanoPHP\Models\BaseModel
+class User extends BaseModel
 {
-    protected $tableName = "users";
+    protected string $tableName = "users";
+
+    public function getUserByName(string $name): array
+    {
+        $sql  = "select users.name, users.surname from users where name = :name";
+        $stmt = $this->dbInstance->prepare($sql);
+        $stmt->execute(['name' => $name]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
