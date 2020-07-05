@@ -13,10 +13,11 @@ $URI = $_SERVER['REQUEST_URI'];
 $di = new NanoPHP\DependencyInjector();
 
 $di->register("config", "\App\Config")
-   ->register("encrypter", "\NanoPHP\Library\Encrypter");
+    ->register("router", "\NanoPHP\Router")
+    ->register("encrypter", "\NanoPHP\Library\Encrypter");
 
 $routes = App\Routes::getRoutes();
-$router = (new App\Router())
+$router = $di->make('router')
                 ->setDependencyInjector($di)
                 ->setURI($URI)
                 ->setRoutes($routes)
