@@ -13,6 +13,8 @@ $URI = $_SERVER['REQUEST_URI'];
 $di = new NanoPHP\DependencyInjector();
 
 $di->register("config", "\App\Config")
+    ->register("request", "\NanoPHP\Library\Http\Request")
+    ->register("response", "\NanoPHP\Library\Http\Response")
     ->register("router", "\NanoPHP\Router")
     ->register("encrypter", "\NanoPHP\Library\Encrypter");
 
