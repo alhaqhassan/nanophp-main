@@ -8,7 +8,8 @@ if (App\Config::DEBUG_MODE) {
     error_reporting(E_ALL);
 }
 
-$URI = $_SERVER['REQUEST_URI'];
+$requestURISplit = parse_url($_SERVER["REQUEST_URI"]);
+$URI = $requestURISplit["path"];
 
 $di = new NanoPHP\DependencyInjector();
 
